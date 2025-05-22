@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
 import TodoListTemplate from './components/TodoListTemplate';
@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <TodoListTemplate form=
       {<Form 
-        todo={todo} 
+        mytodo={todo} 
         myEnter={handleEnter} 
         myChange={handleChange}
         myCreate={handleCreate} />
