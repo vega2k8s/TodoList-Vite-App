@@ -34,7 +34,7 @@ class App extends Component {
       todo: '', // input 초기화
     });
   }
-  
+
   handleEnter = (e) => {
     // 눌려진 키가 Enter Key 이면 handleCreate 호출
     if (e.keyCode === 13) {
@@ -42,19 +42,26 @@ class App extends Component {
     }
   };
 
+  handleToggle = (id) => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo)
+    });
+  }
+
   render() {
     const { todo, todos } = this.state;
-    const { handleChange, handleCreate, handleEnter } = this;
+    const { handleChange, handleCreate, handleEnter, handleToggle } = this;
 
     return (
       <TodoListTemplate form=
-      {<Form 
-        mytodo={todo} 
-        myEnter={handleEnter} 
-        myChange={handleChange}
-        myCreate={handleCreate} />
-      }>
-        <TodoItemList myTodos={todos} />
+        {<Form
+          mytodo={todo}
+          myEnter={handleEnter}
+          myChange={handleChange}
+          myCreate={handleCreate} />
+        }>
+        <TodoItemList myTodos={todos} myToggle={handleToggle} />
       </TodoListTemplate>
     );
   } //render
