@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import './TodoItem.css';
 
 class TodoItem extends Component {
+    /*
+        true(checked 변수에 변동이 있으면) 이면 render() 함수가 호출됨
+        false(checked 변수에 변동이 없으면) 이면 render() 함수가 호출되지 않음 (렌더링 생략)
+    */    
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.checked !== nextProps.checked;
+    }
+
     render() {
         const { text, checked, id, onToggle, onRemove } = this.props;
         return (
