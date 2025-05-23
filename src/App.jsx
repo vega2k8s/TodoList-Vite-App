@@ -31,17 +31,10 @@ class App extends Component {
   }; //handleRemove
 
   render() {
-    const { todo } = this.state;
-    const { handleChange, handleCreate, handleEnter, handleToggle, handleRemove } = this;
+    const { handleToggle, handleRemove } = this;
 
     return (
-      <TodoListTemplate form=
-        {<Form
-          mytodo={todo}
-          myEnter={handleEnter}
-          myChange={handleChange}
-          myCreate={handleCreate} />
-        }>
+      <TodoListTemplate form={<Form />}>
         <TodoItemList  
           myToggle={handleToggle} 
           myRemove={handleRemove}
