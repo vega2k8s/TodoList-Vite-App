@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+
 import TodoItem from '@components/TodoItem';
+import { fetchAllTodos } from '@/actions'
 
 class TodoItemList extends Component {
     /*
@@ -9,6 +12,10 @@ class TodoItemList extends Component {
     */
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.myTodos !== nextProps.myTodos;
+    }
+    //HTML DOM 렌더링 후에 호출되는 lifecyle method
+    componentDidMount() {
+        this.props.fetchAll();
     }
 
     render() {
@@ -38,4 +45,9 @@ TodoItemList.propTypes = {
     myToggle: PropTypes.func,
     myRemove: PropTypes.func
 };
-export default TodoItemList;
+export default connect(
+    //store에 저장된 state 객체의 todos 를 가져와서 myTodos 이름에 매핑
+    (state) => ({myTodos:state.todos}), 
+    //action함수를 dispatch 하는 함수를 fetchAll 이름에 매핑
+    {fetchAll: fetchAllTodos }
+)(TodoItemList);
