@@ -19,14 +19,13 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { myTodos, myToggle } = this.props;
+        const { myTodos } = this.props;
         const todoList = myTodos.map(
             ({ id, text, checked }) => (
                 <TodoItem
                     id={id}
                     text={text}
                     checked={checked}
-                    onToggle={myToggle}
                     key={id}
                 />
             )
@@ -41,7 +40,6 @@ class TodoItemList extends Component {
 
 TodoItemList.propTypes = {
     myTodos: PropTypes.array,
-    myToggle: PropTypes.func,
     fetchAll : PropTypes.func
 };
 

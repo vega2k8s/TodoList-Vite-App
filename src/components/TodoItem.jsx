@@ -18,10 +18,18 @@ class TodoItem extends Component {
         this.props.remove(id);
     }; //handleRemove
 
+    handleToggle = (id) => {
+        const { todos } = this.state;
+        this.setState({
+            todos: todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo)
+        });
+    };// handleToggle
+
+
     render() {
         const { text, checked, id, onToggle } = this.props;
         const { handleRemove } = this;
-        
+
         return (
             <div className="todo-item" onClick={() => onToggle(id)}>
                 <div className="remove" onClick={(e) => {
