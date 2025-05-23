@@ -23,21 +23,14 @@ class App extends Component {
     });
   };// handleToggle
 
-  handleRemove = (id) => {
-    const { todos } = this.state;
-    this.setState({
-      todos: todos.filter(todo => todo.id !== id)
-    });
-  }; //handleRemove
 
   render() {
-    const { handleToggle, handleRemove } = this;
+    const { handleToggle } = this;
 
     return (
       <TodoListTemplate form={<Form />}>
         <TodoItemList  
           myToggle={handleToggle} 
-          myRemove={handleRemove}
           />
       </TodoListTemplate>
     );
