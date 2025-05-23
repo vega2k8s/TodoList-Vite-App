@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import '@components/TodoItem.css';
-import { removeTodo } from '@/actions';
+import { removeTodo, toggleTodo } from '@/actions';
 
 class TodoItem extends Component {
     /*
@@ -18,20 +18,18 @@ class TodoItem extends Component {
         this.props.remove(id);
     }; //handleRemove
 
-    handleToggle = (id) => {
-        const { todos } = this.state;
-        this.setState({
-            todos: todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo)
-        });
+    handleToggle = (todo) => {
+        todo.checked = !todo.checked;
+        this.props.toggle(todo);
     };// handleToggle
 
 
     render() {
-        const { text, checked, id, onToggle } = this.props;
-        const { handleRemove } = this;
+        const { text, checked, id } = this.props;
+        const { handleRemove, handleToggle } = this;
 
         return (
-            <div className="todo-item" onClick={() => onToggle(id)}>
+            <div className="todo-item" onClick={() => handleToggle({ text, checked, id })}>
                 <div className="remove" onClick={(e) => {
                     e.stopPropagation(); // onToggle 이 실행되지 않도록 함
                     handleRemove(id)
@@ -52,7 +50,10 @@ TodoItem.propTypes = {
     text: PropTypes.string,
     checked: PropTypes.bool,
     id: PropTypes.number,
-    onToggle: PropTypes.func,
+    toggle: PropTypes.func,
     remove: PropTypes.func
 };
-export default connect(null, { remove: removeTodo })(TodoItem);
+export default connect(null, { 
+    remove: removeTodo, 
+    toggle: toggleTodo
+})(TodoItem);
