@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import '@components/Form.css';
+import { addTodo } from '@/actions';
 
 class Form extends Component {
     state = {
@@ -19,10 +22,9 @@ class Form extends Component {
             text: todo,
             checked: false
         };
+        this.props.add(newTodo);
 
-        this.setState({
-            todo: '', // input 초기화
-        });
+        this.setState({ todo: ''});
     }
 
     handleEnter = (e) => {
@@ -49,10 +51,7 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-    mytodo: PropTypes.string,
-    myEnter: PropTypes.func,
-    myChange: PropTypes.func,
-    myCreate: PropTypes.func
+    add: PropTypes.func
 };
 
-export default Form;
+export default connect(null, { add: addTodo })(Form);
