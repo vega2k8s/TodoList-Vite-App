@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import '@components/TodoItem.css';
+import { removeTodo } from '@/actions';
 
 class TodoItem extends Component {
     /*
@@ -12,16 +15,18 @@ class TodoItem extends Component {
     }
 
     handleRemove = (id) => {
-        
+        this.props.remove(id);
     }; //handleRemove
 
     render() {
-        const { text, checked, id, onToggle, onRemove } = this.props;
+        const { text, checked, id, onToggle } = this.props;
+        const { handleRemove } = this;
+        
         return (
             <div className="todo-item" onClick={() => onToggle(id)}>
                 <div className="remove" onClick={(e) => {
                     e.stopPropagation(); // onToggle 이 실행되지 않도록 함
-                    onRemove(id)
+                    handleRemove(id)
                 }
                 }>&times;</div>
                 <div className={`todo-text ${checked && 'checked'}`}>
@@ -40,6 +45,6 @@ TodoItem.propTypes = {
     checked: PropTypes.bool,
     id: PropTypes.number,
     onToggle: PropTypes.func,
-    onRemove: PropTypes.func
+    remove: PropTypes.func
 };
-export default TodoItem
+export default connect(null, { remove: removeTodo })(TodoItem);
