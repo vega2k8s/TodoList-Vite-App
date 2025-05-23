@@ -43,11 +43,12 @@ class TodoItemList extends Component {
 TodoItemList.propTypes = {
     myTodos: PropTypes.array,
     myToggle: PropTypes.func,
-    myRemove: PropTypes.func
+    myRemove: PropTypes.func,
+    fetchAll : PropTypes.func
 };
 export default connect(
     //store에 저장된 state 객체의 todos 를 가져와서 myTodos 이름에 매핑
     (state) => ({myTodos:state.todos}), 
     //action함수를 dispatch 하는 함수를 fetchAll 이름에 매핑
-    {fetchAll: fetchAllTodos }
+    { fetchAll: fetchAllTodos }
 )(TodoItemList);
