@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
 
 //Action 과 Reducer를 합친 개념이 Slice 이다.
-
-const apiUrl = process.env.REACT_APP_APIURL;
+const BASE_URL = import.meta.env.VITE_API_URL;
+const apiUrl = `${BASE_URL}/todos`;
 
 export const fetchAllTodos = createAsyncThunk(
     //action 이름
