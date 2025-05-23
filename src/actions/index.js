@@ -7,6 +7,7 @@ const apiUrl = `${BASE_URL}/todos`;
 //Action type 정의
 export const FETCH_TODOS = "FETCH_TODOS";
 export const ADD_TODO = "ADD_TODO";
+export const REMOVE_TODO = "REMOVE_TODO";
 
 export const fetchAllTodos = () => {
     return (dispatch) => {
@@ -37,3 +38,20 @@ export const addTodo = (todo) => {
             })
     }
 }; //addTodo
+
+export const removeTodo = (id) => {
+    return (dispatch) => {
+        axios.delete(`${apiUrl}/${id}`)
+            .then(res => {
+                dispatch({
+                    type: REMOVE_TODO,
+                    payload: res.data
+                })
+            })
+            .catch(error => {
+                console.log(error);
+                throw (error);
+            })
+    }
+}; //removeTodo
+
