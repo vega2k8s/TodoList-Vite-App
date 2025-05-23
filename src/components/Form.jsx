@@ -14,15 +14,13 @@ class Form extends Component {
     }
 
     handleCreate = () => {
-        const { todo, todos } = this.state;
+        const { todo } = this.state;
         const newTodo = {
-            id: this.id++,
             text: todo,
             checked: false
         };
 
         this.setState({
-            todos: [...todos, newTodo],
             todo: '', // input 초기화
         });
     }
@@ -35,12 +33,14 @@ class Form extends Component {
     };
 
     render() {
-        const { mytodo, myEnter, myChange, myCreate } = this.props;
+        const { todo } = this.state;
+        const { handleChange, handleCreate, handleEnter } = this;
+
         return (
             <div className="form">
-                <input value={mytodo} onChange={myChange}
-                    onKeyDown={myEnter} />
-                <div className="create-button" onClick={myCreate}>
+                <input value={todo} onChange={handleChange}
+                    onKeyDown={handleEnter} />
+                <div className="create-button" onClick={handleCreate}>
                     추가
                 </div>
             </div>
