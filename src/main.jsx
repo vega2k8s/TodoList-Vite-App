@@ -7,11 +7,14 @@ import App from '@/App.jsx'
 //import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { toDoReducer } from './reducers';
+//import { toDoReducer } from './reducers';
+import todosSlice from '@/reducers/todoSlice';
+
 
 //const store = createStore(toDoReducer, applyMiddleware(thunk));
 const store = configureStore({
-  reducer: toDoReducer,
+  //reducer: toDoReducer,
+  reducer: todosSlice
   //middleware: getDefaultMiddleware => getDefaultMiddleware().concat(thunk)
 });
 
